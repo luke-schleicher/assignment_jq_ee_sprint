@@ -30,29 +30,59 @@ var passwordMatches = function(event) {
     $('#p-matching-message').text("Your password don't match");
   }else{
     $('#p-matching-message').text("Your passwords match!");
-    return true
+    return true;
   }
-  return false
+  return "password does not match";
 };
 
 var validations = function(event){
-  event.preventDefault()
-  var lengthText = validationsLength( $('input[type="text"]')[0], 32, 4)
-  var lengthTextFeild = validationsLength()
-  var lengthPassword = validationsLength()
-  var matching = passwordMatches()
+
+  event.preventDefault();
+  $('#error-messages').text('');
+
+  var toValidate = [],
+      errors = [];
+
+  toValidate.push([$('input[type="text"]').eq(0), 32, 4]);
+  toValidate.push([$('textarea').eq(0), 140, 4]);
+  toValidate.push([$('input[type="password"]').eq(0), 16, 4]);
+
+  toValidate.forEach(function(el) {
+    errors.push(validationsLength(el[0][0], el[1], el[2]));
+    console.log(el[0][0]);
+    el[0].addClass('error');
+  });
+
+  var eventObject = {
+    target: $('#password')[0],
+    data: {
+      searchId: '#p-confirmation'
+    }
+  };
+
+  var matching = passwordMatches();
+
+  // iterate over errors array and do stuff
+
+  errors.forEach(function(el) {
+    if (el === true) {
+    } else {
+      $('#error-messages').append(el);
+    }
+  });
+
 };
 
 var validationsLength = function(target, max, min){
-  var value = target.value
-  var length = value.length
+  var value = target.value;
+  var length = value.length;
 
   if(length > max){
-    return "too long!"
+    return target.tagName + " too long! ";
   }else if(length < min){
-    return "too short"
+    return target.tagName + " too short! ";
   }else{
-    return true 
+    return true;
   }
 
 };
