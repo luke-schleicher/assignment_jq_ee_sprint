@@ -1,29 +1,28 @@
 var displayCharsRemaining = function(event) {
 
-  console.log('display chars running');
+  var current = event.target;
+  var $current = $(current)
 
-  var numChars = event.val().length;
+  var numChars = current.value.length;
   var charsLeft = 32 - numChars;
 
-  console.log(numChars);
-
-  $('<span>').insertAfter(event.target)
-    .text(charsLeft);
-
+  if(charsLeft === 32){ 
+    $current.next().text("");
+  }
+  else{
+      $current.next().text(charsLeft + "characters left!");
+    }
 };
 
 // var charsUsed = ?;
 
 var inputListener = function() {
-  console.log('input listener running');
-  $('input').keypress(displayCharsRemaining);
+  $('input').keyup(displayCharsRemaining);
 
 };
 
 
 $(document).ready(function(){
-
   inputListener();
-
 });
 
