@@ -48,15 +48,15 @@ FormFunctions = {
     toValidate.push([$('input[type="text"]').eq(0), 32, 4]);
     toValidate.push([$('textarea').eq(0), 140, 4]);
     toValidate.push([$('input[type="password"]').eq(0), 16, 4]);
-    $('#p-confirmation').eq(0).removeClass('error')
+    $('#p-confirmation').eq(0).removeClass('error');
 
 
     toValidate.forEach(function(el) {
-      var result = validationsLength(el[0][0], el[1], el[2])
+      var result = FormFunctions.validationsLength(el[0][0], el[1], el[2]);
       errors.push(result);
-      el[0].removeClass('error')
+      el[0].removeClass('error');
       if(typeof result === "string"){
-        el[0].addClass('error')
+        el[0].addClass('error');
       }
     });
 
@@ -67,14 +67,14 @@ FormFunctions = {
       }
     };
 
-    var matching = passwordMatches(eventObject);
-    errors.push(matching)
-    var noErrors = true
+    var matching = FormFunctions.passwordMatches(eventObject);
+    errors.push(matching);
+    var noErrors = true;
     
     errors.forEach(function(el) {
       if (el === true) {
       } else {
-        noErrors = false
+        noErrors = false;
         $('#error-messages').append(el);
         if(el === "password does not match"){
           $('input[type="password"]').addClass('error');
@@ -83,7 +83,7 @@ FormFunctions = {
     });
 
     if(noErrors){
-      alert("You succeeded! Good Job!")
+      alert("You succeeded! Good Job!");
     }
 
   },
@@ -94,16 +94,15 @@ FormFunctions = {
 
     if(length > max){
       return target.tagName + " too long! ";
-
-    }else if(length < min){
+    } else if(length < min){
       return target.tagName + " too short! ";
-    }else{
+    } else{
       return true;
     }
 
   }
 
-}
+};
 
 var formListener = function() {
 
