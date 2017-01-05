@@ -47,21 +47,13 @@ table {
   border-spacing: 0;
 }
 
-#dropdown {
-  background: #ddd;
-  cursor: pointer;
-}
+/*
+============
+stuff
+============
+*/
 
-#dropdown li {
-  display: none;
-}
-
-#dropdown li:hover {
-  background: #ccc;
-}
-
-#dropdown .top-display {
-  display: block;
-  background-color: red;
-  min-height: 30px;
+.first-img{
+  max-width: 100%;
+  max-height: 100vh;
 }
