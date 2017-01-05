@@ -53,7 +53,8 @@ stuff
 ============
 */
 
-.first-img{
+.first-img {
   max-width: 100%;
   max-height: 100vh;
+  cursor: url(cursor.png), crosshair;
 }
