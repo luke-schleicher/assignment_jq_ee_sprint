@@ -1,3 +1,4 @@
+
 var displayCharsRemaining = function(event) {
 
   var current = event.target;
@@ -46,11 +47,16 @@ var validations = function(event){
   toValidate.push([$('input[type="text"]').eq(0), 32, 4]);
   toValidate.push([$('textarea').eq(0), 140, 4]);
   toValidate.push([$('input[type="password"]').eq(0), 16, 4]);
+  $('#p-confirmation').eq(0).removeClass('error')
+
 
   toValidate.forEach(function(el) {
-    errors.push(validationsLength(el[0][0], el[1], el[2]));
-    console.log(el[0][0]);
-    el[0].addClass('error');
+    var result = validationsLength(el[0][0], el[1], el[2])
+    errors.push(result);
+    el[0].removeClass('error')
+    if(typeof result === "string"){
+      el[0].addClass('error')
+    }
   });
 
   var eventObject = {
@@ -60,16 +66,24 @@ var validations = function(event){
     }
   };
 
-  var matching = passwordMatches();
-
-  // iterate over errors array and do stuff
-
+  var matching = passwordMatches(eventObject);
+  errors.push(matching)
+  var noErrors = true
+  
   errors.forEach(function(el) {
     if (el === true) {
     } else {
+      noErrors = false
       $('#error-messages').append(el);
+      if(el === "password does not match"){
+        $('input[type="password"]').addClass('error');
+      }
     }
   });
+
+  if(noErrors){
+    alert("You succeeded! Good Job!")
+  }
 
 };
 
@@ -79,6 +93,7 @@ var validationsLength = function(target, max, min){
 
   if(length > max){
     return target.tagName + " too long! ";
+
   }else if(length < min){
     return target.tagName + " too short! ";
   }else{
