@@ -53,19 +53,16 @@ var imgFeatures = {
     console.log('name select ran');
 
     var $select = $('select').last();
+    var $option = $select.children("option:selected").last
 
     if ($select.hasClass('no-option')) {
-    console.log('if ran');
     } else {
-    console.log('else ran');
-      // keep box
-      // remove dropdown
-      // add span w/ name
+      var $img = $('img').last()
+      $img.addClass('saved');
+      $('<span>').insertAfter($img)
+      .text($(e.target).text())
 
-      $('img').last().addClass('saved');
-
-
-
+      this.targetSelected
     }
 
   }
